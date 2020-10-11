@@ -1,0 +1,106 @@
+<html>
+  <header>
+    <div style="text-align: center">
+      <h1>My Kankan Table application</h1>
+    </div>
+  </header>
+  <body>
+    <h2>Creations of your cards</h2>
+    <form>
+      <fieldset>
+        <table>
+          <tr>
+            <td>
+              <label for="text">Donné le nom de votre Carte</label>
+            </td>
+            <td>
+              <input type="text" name="text" id="text" />
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="url">Champ d'Url</label>
+            </td>
+            <td>
+              <input type="url" id="url" name="url" />
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="text">Description de la carte</label>
+            </td>
+            <td>
+              <input type="text" name="note" id="note" />
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <button
+                type="submit"
+                class="boutonSubmit"
+                role="button"
+                aria-disabled="false"
+              >
+                Création de votre carte
+              </button>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </form>
+
+    <h2>Suprimer une carte</h2>
+    <form>
+      <fieldset>
+        <table>
+          <tr>
+            <td>
+              <label for="text">Supréssion de la carte</label>
+            </td>
+            <td>
+              <input type="text" name="delete" id="delete" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="submit" class="deleteButton">
+                Supression d'une carte
+              </button>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </form>
+
+    <h2>Rechercher une carte</h2>
+    <form>
+      <fieldset>
+        <table>
+          <tr>
+            <td>
+              <label for="text">Supréssion de la carte</label>
+            </td>
+            <td>
+              <input type="text" name="search" id="search" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="submit" class="searchButton">Rechecher</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <ul>
+                <li *ngFor="let card of cards">card.libelle</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </form>
+  </body>
+</html>
