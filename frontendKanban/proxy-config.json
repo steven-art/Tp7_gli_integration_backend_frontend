@@ -1,0 +1,6 @@
+{
+  "http://localhost:8080/card/": {
+    "target": "http://localhost:32045/",
+    "secure": false
+  }
+}

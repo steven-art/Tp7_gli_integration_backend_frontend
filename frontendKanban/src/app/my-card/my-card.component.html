@@ -6,7 +6,7 @@
   </header>
   <body>
     <h2>Creations of your cards</h2>
-    <form>
+    <form id="formCard" name="formCard" #form="ngForm">
       <fieldset>
         <table>
           <tr>
@@ -14,7 +14,12 @@
               <label for="text">Donné le nom de votre Carte</label>
             </td>
             <td>
-              <input type="text" name="text" id="text" />
+              <input
+                type="text"
+                name="text"
+                id="text"
+                [(ngModel)]="searchCardLibelle"
+              />
             </td>
           </tr>
 
@@ -23,7 +28,12 @@
               <label for="url">Champ d'Url</label>
             </td>
             <td>
-              <input type="url" id="url" name="url" />
+              <input
+                type="url"
+                id="url"
+                name="url"
+                [(ngModel)]="searchCardUrl"
+              />
             </td>
           </tr>
 
@@ -32,13 +42,19 @@
               <label for="text">Description de la carte</label>
             </td>
             <td>
-              <input type="text" name="note" id="note" />
+              <input
+                type="text"
+                name="note"
+                id="note"
+                [(ngModel)]="searchCardNote"
+              />
             </td>
           </tr>
 
           <tr>
             <td>
               <button
+                (click)="createCardButton()"
                 type="submit"
                 class="boutonSubmit"
                 role="button"
@@ -61,12 +77,21 @@
               <label for="text">Supréssion de la carte</label>
             </td>
             <td>
-              <input type="text" name="delete" id="delete" />
+              <input
+                type="text"
+                name="delete"
+                id="delete"
+                [(ngModel)]="deleteCardId"
+              />
             </td>
           </tr>
           <tr>
             <td>
-              <button type="submit" class="deleteButton">
+              <button
+                (click)="deleteCardButton()"
+                type="submit"
+                class="deleteButton"
+              >
                 Supression d'une carte
               </button>
             </td>
@@ -84,18 +109,37 @@
               <label for="text">Supréssion de la carte</label>
             </td>
             <td>
-              <input type="text" name="search" id="search" />
+              <input
+                type="text"
+                name="search"
+                id="search"
+                [(ngModel)]="searchCardLibelle"
+              />
             </td>
           </tr>
           <tr>
             <td>
-              <button type="submit" class="searchButton">Rechecher</button>
+              <button (click)="searchCard()" type="submit" class="searchButton">
+                Rechecher
+              </button>
             </td>
           </tr>
           <tr>
             <td>
+              La carte selectionné est :
+              {{ selectedCardLibelle }}
+              <select [(ngModel)]="selectedCardLibelle">
+                <option
+                  [value]="card.libelle"
+                  *ngFor="
+                    let card of cards
+                      | filterCardPipe: 'libelle:searchCardLibelle'
+                  "
+                ></option>
+              </select>
+
               <ul>
-                <li *ngFor="let card of cards">card.libelle</li>
+                <li *ngFor="let card of cards">{{ card.libelle }}</li>
               </ul>
             </td>
           </tr>
