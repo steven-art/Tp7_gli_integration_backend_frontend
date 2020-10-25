@@ -46,7 +46,7 @@ export class MyCardComponent {
 
   createCardButton(): void {
     this.cardService.createCard(
-      this.selectedCardLibelle,
+      this.searchCardLibelle,
       this.searchCardUrl,
       this.searchCardNote
     );
