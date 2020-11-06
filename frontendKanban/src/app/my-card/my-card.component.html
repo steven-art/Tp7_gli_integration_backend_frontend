@@ -18,7 +18,7 @@
                 type="text"
                 name="text"
                 id="text"
-                [(ngModel)]="searchCardLibelle"
+                [(ngModel)]="Createlibelle"
               />
             </td>
           </tr>
@@ -113,7 +113,7 @@
                 type="text"
                 name="search"
                 id="search"
-                [(ngModel)]="searchCardLibelle"
+                [(ngModel)]="libelle"
               />
             </td>
           </tr>
@@ -127,13 +127,16 @@
           <tr>
             <td>
               La carte selectionné est :
-              {{ selectedCardLibelle }}
-              <select [(ngModel)]="selectedCardLibelle">
+              {{ libelle }}
+              <select
+                [(ngModel)]="libelle"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <option
                   [value]="card.libelle"
                   *ngFor="
                     let card of cards
-                      | filterCardPipe: 'libelle:searchCardLibelle'
+                      | filterCardPipe: 'libelle':'searchCardLibelle'
                   "
                 ></option>
               </select>

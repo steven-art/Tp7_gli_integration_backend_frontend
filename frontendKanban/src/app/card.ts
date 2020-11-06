@@ -14,7 +14,6 @@ export interface ICard {
 export class Card {
   [x: string]: any;
   constructor(
-    public id: string,
     public libelle: string,
     public url: string,
     public note: string

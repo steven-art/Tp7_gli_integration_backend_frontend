@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Card, ICard } from '../card';
 import { CardAPIServiceService } from '../card-apiservice.service';
 
@@ -10,43 +11,47 @@ import { CardAPIServiceService } from '../card-apiservice.service';
 })
 export class MyCardComponent {
   libelle: string;
-  selectedCardLibelle: string;
-  searchCardLibelle = '';
+  Createlibelle = '';
   searchCardUrl = '';
   searchCardNote = '';
-  deleteCardId = '';
+  deleteCardId: number;
   cards: Card[] = [];
   cardDetail: ICard;
 
   constructor(private cardService: CardAPIServiceService) {
-    this.cards.push(new Card('1', 'card1', 'url1', 'première card'));
+    this.cards.push(
+      new Card(this.Createlibelle, this.searchCardUrl, this.searchCardNote)
+    );
   }
+
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnInit(): void {
     this.cardService.getCards(this.libelle).subscribe((data) => {
-      data.results.forEach((e, index) => {
-        this.cards.push(new Card('' + index, e.libelle, e.url, e.note));
+      data.results.forEach((e) => {
+        this.cards.push(new Card(e.libelle, e.url, e.note));
       });
     });
   }
 
   searchCard(): void {
-    if (this.selectedCardLibelle !== '') {
+    console.log(this.libelle);
+    if (this.libelle !== '') {
       this.cardService
-        .getCardInfo(this.selectedCardLibelle)
+        .getCardInfo(this.libelle)
         .subscribe((data) => (this.cardDetail = data));
     }
   }
 
   deleteCardButton(): void {
-    if (this.deleteCardId !== '') {
+    if (this.deleteCardId !== null) {
       this.cardService.deleteCard(this.deleteCardId);
     }
+    console.log(this.deleteCardId);
   }
 
   createCardButton(): void {
     this.cardService.createCard(
-      this.searchCardLibelle,
+      this.Createlibelle,
       this.searchCardUrl,
       this.searchCardNote
     );

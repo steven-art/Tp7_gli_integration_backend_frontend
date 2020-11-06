@@ -1,6 +1,8 @@
 {
-  "http://localhost:8080/card/": {
-    "target": "http://localhost:32045/",
-    "secure": false
+  "/card/*": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
   }
 }

@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Card, CardServiceRes, ICard } from './card';
-import { MyCardComponent } from './my-card/my-card.component';
 
 @Injectable({
   providedIn: 'root',
@@ -11,32 +10,28 @@ export class CardAPIServiceService {
   constructor(private http: HttpClient) {}
 
   getCards(libelle: string): Observable<CardServiceRes> {
-    return this.http.get<CardServiceRes>(
-      'http://localhost:8080/card/get-by-libelle/' + libelle
-    );
+    return this.http.get<CardServiceRes>(`/card/get-by-libelle/${libelle}`);
   }
-  getCardInfo(id: string): Observable<ICard> {
-    return this.http.get<ICard>('http://localhost:8080/card/' + id + '/');
+  getCardInfo(libelle: string): Observable<ICard> {
+    return this.http.get<ICard>(`/card/get-by-libelle/${libelle}`);
   }
 
   createCard(
-    libelle: string,
+    Createlibelle: string,
     url: string,
     note: string
   ): Observable<CardServiceRes> {
+    console.log(
+      `/card/create?libelle=${Createlibelle}&url=${url}&note=${note}`
+    );
     return this.http.post<CardServiceRes>(
-      'http://localhost:8080/card/create?libelle=' +
-        libelle +
-        '&url=' +
-        url +
-        '&note=' +
-        note,
+      `/card/create?libelle=${Createlibelle}&url=${url}&note=${note}`,
       Card
     );
   }
-  deleteCard(id: string): Observable<{}> {
-    const url = 'http://localhost:8080/card/delete?id=' + id; // DELETE api/heroes/42
-
+  deleteCard(id: number): Observable<{}> {
+    const url = `/card/delete?id=${id}`; // DELETE api/heroes/42
+    console.log(id);
     return this.http.delete(url);
   }
 }

@@ -48,11 +48,7 @@ Son rôle est de communiquer avec le code html de la page pour la rendre dynamiq
   Ces trois methodes sont appelées lorsque l'utilisateur click sur les bouton de la page Html.
 
 Fonctionnalité:
-Rien ne marche car la mise en place du proxy n'a pas fonctionné mais on peut voir que les requêtes http sont bien appeler car les logges mise en place dans la partie back and s'affiche lorsque l'on interagit avec la page web. Une erreur presente m'empêche d'allez plus loin:
-
-```
-Blocage d’une requête multiorigines (Cross-Origin Request) : la politique « Same Origin » ne permet pas de consulter la ressource distante située sur http://localhost:8080/card/get-by-libelle/undefined. Raison : l’en-tête CORS « Access-Control-Allow-Origin » est manquant.
-```
+On peut voir que les requêtes http sont bien appeler car les logges mise en place dans la partie back and s'affiche lorsque l'on interagit avec la page web.
 
 ---
 
@@ -62,13 +58,31 @@ création du fichier proxy-config.json qui permet de rediriger les URL de mon AP
 
 ```
 {
-    "/api": {
-        "target": "http://localhost:32045/",
-        "secure": false
-    }
+  "/api/*": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
 }
 ```
 
-Ensuite dans le fichier anglar.json j'ai ajouté dans le serve la ligne : "proxyConfig": "proxy-config.json"
+Pour lancer le sever il faut utilisé la commande:
+
+```
+ng serve --proxy-config proxy-config.json
+
+```
 
 Attention: cette methode ne marche que avec "ng serve et ne fonctionne plus en production.
+
+Ensuite dans le fichier anglar.json j'ai ajouté dans le serve la ligne : "proxyConfig": "proxy-config.json"
+
+Ensuite il faut lancer côté backend la base de donné phpMyAdmin :
+
+```
+sudo docker start some-mysql myadmin
+
+```
+
+Et faire un run du Projet de TAA recuperable a l'addresse suivant : https://github.com/steven-art/Ensemble_des_tps_de_TAA_2020/tree/master/eclipse-workspace/Tp3TAA/Spring2020-master/spring-boot-sample-data-jpa-standalone
