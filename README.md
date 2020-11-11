@@ -7,7 +7,8 @@ Master CCN
 
 ## Description: Mise en place de la partie frontend correspondant à notre Tp 3 TAA => Réalisation du Kanban avec de cartes.
 
-Réalisation:
+Réalisation:  
+IL n'y a que la partie ajout d'une carte, supression d'une carte et recherche d'une carte qui est disponnible sur l'interface utilisateur.
 
 Création du composent my-card:
 
@@ -45,10 +46,10 @@ Son rôle est de communiquer avec le code html de la page pour la rendre dynamiq
 - On retrouve la méthode searchCard qui permet de rechercher une carte.
 - La méthode deleteCardButton qui permet la supression d'une carte.
 - La méthode createCardButton qui permet de créer une carte.
-  Ces trois methodes sont appelées lorsque l'utilisateur click sur les bouton de la page Html.
+  Ces trois methodes sont appelées lorsque l'utilisateur click sur les boutons de la page Html.
 
 Fonctionnalité:
-On peut voir que les requêtes http sont bien appeler car les logges mise en place dans la partie back and s'affiche lorsque l'on interagit avec la page web.
+On peut voir que les requêtes http sont bien appeler car les logges mise en place dans la partie backend and s'affiche lorsque l'on interagit avec la page web. on peut voir aussi que dans la console le proxy cherche a faire le mapping entre les 2 requêtes http mais rien ne se passe au niveau de la base de données mySQL.
 
 ---
 

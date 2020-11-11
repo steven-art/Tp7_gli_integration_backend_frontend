@@ -27,9 +27,11 @@ export class MyCardComponent {
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnInit(): void {
     this.cardService.getCards(this.libelle).subscribe((data) => {
-      data.results.forEach((e) => {
-        this.cards.push(new Card(e.libelle, e.url, e.note));
-      });
+      data.results.forEach(
+        (e: { libelle: string; url: string; note: string }) => {
+          this.cards.push(new Card(e.libelle, e.url, e.note));
+        }
+      );
     });
   }
 
