@@ -12,26 +12,24 @@ export class CardAPIServiceService {
   getCards(libelle: string): Observable<CardServiceRes> {
     return this.http.get<CardServiceRes>(`/card/get-by-libelle/${libelle}`);
   }
-  getCardInfo(libelle: string): Observable<ICard> {
-    return this.http.get<ICard>(`/card/get-by-libelle/${libelle}`);
+  getCardInfo(libelle: string): Observable<string> {
+    return this.http.get<string>(`/card/get-by-libelle/${libelle}`);
   }
 
   createCard(
     Createlibelle: string,
     url: string,
     note: string
-  ): Observable<CardServiceRes> {
+  ): Observable<any> {
     console.log(
       `/card/create?libelle=${Createlibelle}&url=${url}&note=${note}`
     );
-    return this.http.post<CardServiceRes>(
+    return this.http.post(
       `/card/create?libelle=${Createlibelle}&url=${url}&note=${note}`,
       Card
     );
   }
-  deleteCard(id: number): Observable<{}> {
-    const url = `/card/delete?id=${id}`; // DELETE api/heroes/42
-    console.log(id);
-    return this.http.delete(url);
+  deleteCard(deleteCardId: string): Observable<string> {
+    return this.http.delete<string>(`card/delete?id=${deleteCardId}`);
   }
 }

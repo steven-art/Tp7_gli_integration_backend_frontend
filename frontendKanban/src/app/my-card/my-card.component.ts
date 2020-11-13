@@ -10,14 +10,15 @@ import { CardAPIServiceService } from '../card-apiservice.service';
   providers: [CardAPIServiceService],
 })
 export class MyCardComponent {
-  libelle: string;
+  libelle = '';
   Createlibelle = '';
   searchCardUrl = '';
   searchCardNote = '';
-  deleteCardId: number;
+  deleteCardId = '';
   cards: Card[] = [];
-  cardDetail: ICard;
-
+  cardId = '';
+  removeCard: string;
+  cardCreate: string;
   constructor(private cardService: CardAPIServiceService) {
     this.cards.push(
       new Card(this.Createlibelle, this.searchCardUrl, this.searchCardNote)
@@ -25,37 +26,35 @@ export class MyCardComponent {
   }
 
   // tslint:disable-next-line:use-lifecycle-interface
-  ngOnInit(): void {
-    this.cardService.getCards(this.libelle).subscribe((data) => {
-      data.results.forEach(
-        (e: { libelle: string; url: string; note: string }) => {
-          this.cards.push(new Card(e.libelle, e.url, e.note));
-        }
-      );
-    });
-  }
+  ngOnInit(): void {}
 
-  searchCard(): void {
+  searchCard(libelle: string): void {
     console.log(this.libelle);
     if (this.libelle !== '') {
       this.cardService
         .getCardInfo(this.libelle)
-        .subscribe((data) => (this.cardDetail = data));
+        .subscribe((data) => (this.cardId = data));
+      console.log(this.cardId);
+      this.cardId = 'reinitialisation';
     }
   }
 
-  deleteCardButton(): void {
-    if (this.deleteCardId !== null) {
-      this.cardService.deleteCard(this.deleteCardId);
+  deleteCardButton(deleteCardId: string): void {
+    if (deleteCardId !== '') {
+      this.cardService
+        .deleteCard(this.deleteCardId)
+        .subscribe((data) => (this.removeCard = data));
     }
     console.log(this.deleteCardId);
   }
 
-  createCardButton(): void {
-    this.cardService.createCard(
-      this.Createlibelle,
-      this.searchCardUrl,
-      this.searchCardNote
-    );
+  createCardButton(
+    Createlibelle: string,
+    searchCardUrl: string,
+    searchCardNote: string
+  ): void {
+    this.cardService
+      .createCard(this.Createlibelle, this.searchCardUrl, this.searchCardNote)
+      .subscribe((data) => (this.cardCreate = data));
   }
 }

@@ -43,6 +43,7 @@
             </td>
             <td>
               <input
+                matInput
                 type="text"
                 name="note"
                 id="note"
@@ -54,7 +55,9 @@
           <tr>
             <td>
               <button
-                (click)="createCardButton()"
+                (click)="
+                  createCardButton(Createlibelle, searchCardUrl, searchCardNote)
+                "
                 type="submit"
                 class="boutonSubmit"
                 role="button"
@@ -78,6 +81,7 @@
             </td>
             <td>
               <input
+                matInput
                 type="text"
                 name="delete"
                 id="delete"
@@ -88,7 +92,7 @@
           <tr>
             <td>
               <button
-                (click)="deleteCardButton()"
+                (click)="deleteCardButton(deleteCardId)"
                 type="submit"
                 class="deleteButton"
               >
@@ -119,7 +123,11 @@
           </tr>
           <tr>
             <td>
-              <button (click)="searchCard()" type="submit" class="searchButton">
+              <button
+                (click)="searchCard(libelle)"
+                type="submit"
+                class="searchButton"
+              >
                 Rechecher
               </button>
             </td>
@@ -140,12 +148,19 @@
                   "
                 ></option>
               </select>
-
               <ul>
                 <li *ngFor="let card of cards">{{ card.libelle }}</li>
               </ul>
             </td>
           </tr>
+          <label>Identifiant :</label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="this.cardId"
+            [ngModelOptions]="{ standalone: true }"
+            readonly
+          />
         </table>
       </fieldset>
     </form>

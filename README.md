@@ -49,7 +49,20 @@ Son rôle est de communiquer avec le code html de la page pour la rendre dynamiq
   Ces trois methodes sont appelées lorsque l'utilisateur click sur les boutons de la page Html.
 
 Fonctionnalité:
-On peut voir que les requêtes http sont bien appeler car les logges mise en place dans la partie backend and s'affiche lorsque l'on interagit avec la page web. on peut voir aussi que dans la console le proxy cherche a faire le mapping entre les 2 requêtes http mais rien ne se passe au niveau de la base de données mySQL.
+On peut voir que les requêtes http sont bien appeler grâce aux logges mise en place dans la partie backend et au retour dans le terminal ou le serveur tourne:
+
+```
+[HPM] GET /card/get-by-libelle/player1 -> http://localhost:8080
+[HPM] GET /card/get-by-libelle/player1 -> http://localhost:8080
+[HPM] GET /card/get-by-libelle/player1 -> http://localhost:8080
+[HPM] GET /card/get-by-libelle/player1 -> http://localhost:8080
+[HPM] GET /card/get-by-libelle/player1 -> http://localhost:8080
+[HPM] GET /card/get-by-libelle/super -> http://localhost:8080
+[HPM] DELETE /card/delete?id=8 -> http://localhost:8080
+```
+
+on peut voir aussi que dans la console le proxy cherche a faire le mapping entre les 2 requêtes http mais rien ne se passe au niveau de la base de données mySQL.
+Ce qui marche c'est la partie création de carte sur l'interface, ce qui ne marche pas la partie supression de carte dans la bas on tombe sur une erreur 500. Et la recherche de carte a l'aire de marcher mais pas d'affichage de id de la carte.
 
 ---
 
